@@ -50,6 +50,9 @@ void arcade::Arcade::run()
     clock_t chrono = clock();
 
     while (_rt == RUN) {
+        if (clock() - chrono < 30000)
+            continue;
+        chrono = clock();
         event evt = _disp->getEvent();
         switch (evt) {
             case arcade::event::Quit:
@@ -88,12 +91,10 @@ void arcade::Arcade::run()
             default:
                 break;
         }
-        if (clock() - chrono > 30000) {
-            chrono = clock();
-            if (_pause == false)
-                _game->updateGame(evt);
-            _disp->drawGameObjects(_game->getGameObjects());
+        if (_pause == false) {
+            _game->updateGame(evt);
         }
+        _disp->drawGameObjects(_game->getGameObjects());
     }
     if (_rt == MENU)
         runMenu();
@@ -107,12 +108,12 @@ void arcade::Arcade::runMenu()
     vector2<unsigned> selector = {0, 0};
     vector2<bool> areSelec = {false, false};
 //    bool runMenu = true;
-//    clock_t chrono = clock();
+    clock_t chrono = clock();
 
     while (_rt == MENU) {
-//        if (clock() - chrono >= 30000)
-//            continue;
-//        chrono = clock();
+        if (clock() - chrono < 30000)
+            continue;
+        chrono = clock();
         switch (_disp->getEvent()) {
             case arcade::event::Quit: return;
             case arcade::event::Up:
