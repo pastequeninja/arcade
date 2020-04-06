@@ -29,8 +29,8 @@ namespace arcade {
                 int _Window_Y;
                 std::string _LibSelected;
                 std::string _GameSelected;
-                int _current_game;
-                int _current_lib;
+                __SIZE_TYPE__ _current_game;
+                __SIZE_TYPE__ _current_lib;
                 bool _left_side;
                 int ev;
                 int _Score;

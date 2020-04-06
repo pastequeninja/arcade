@@ -44,8 +44,8 @@ GXX	=	g++
 
 all:
 		make core -C .
-		make graphicals -C .
 		make games -C .
+		make graphicals -C .
 
 $(NAME):	$(OBJS)
 

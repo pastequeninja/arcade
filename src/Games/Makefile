@@ -6,8 +6,9 @@
 ##
 
 all:
+	mkdir -p ../../games/
 	make -C Nibbler
-
+	
 clean:
 	make clean -C Nibbler
 
