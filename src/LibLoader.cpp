@@ -8,20 +8,23 @@
 #include "LibLoader.hpp"
 #include "IDisplayModule.hpp"
 #include "IGameModule.hpp"
+#include "ArcadeError.hpp"
 
 template<typename T>
 inline
-arcade::LibLoader<T>::LibLoader(const std::string &path) :
-_handler(nullptr), create(nullptr), _p(path)
-//try {
+arcade::LibLoader<T>::LibLoader(const std::string &path)
+try : _handler(nullptr), create(nullptr), _p(path)
 {
+//{
     _handler = dlopen(path.c_str(), RTLD_LAZY);
     if (_handler == nullptr) {
-        std::cerr << dlerror() << std::endl;
-        // throw
+        throw ArcadeError("LibLoader", dlerror());
     }
-    *(void **)(&create) = dlsym(_handler, "create");
-} // catch
+    if ((*(void **)(&create) = dlsym(_handler, "create")) == NULL)
+        throw ArcadeError("LibLoader", dlerror());
+} catch (const arcade::ArcadeError &e) {
+    throw e;
+}
 
 template<typename T>
 inline

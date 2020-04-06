@@ -25,7 +25,8 @@ OBJS=		$(SRC:%.cpp=%.o)
 all:		$(LIBNAME)
 
 $(LIBNAME):	$(OBJS)
-			$(GXX) $(OBJS) -fPIC -shared -o $(LIBNAME)
+		$(GXX) $(OBJS) -fPIC -shared -o $(LIBNAME)
+		mv $(LIBNAME) ../../../games
 
 clean:
 		$(RM) $(OBJS)

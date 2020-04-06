@@ -11,6 +11,7 @@
 #include "LibParser.hpp"
 #include <algorithm>
 #include <LibLoader.hpp>
+#include <ctime>
 
 arcade::Arcade::Arcade(const std::string &glPath)
 try : _selectGL(0), _selectGame(0), _pause(false), _disp(nullptr), _game(nullptr), _originPath(glPath)
@@ -19,6 +20,8 @@ try : _selectGL(0), _selectGame(0), _pause(false), _disp(nullptr), _game(nullptr
     std::vector<std::string> GamesPaths = LibParser::collectLibs();
     _maxGL = GLPaths.size();
     _maxGame = GamesPaths.size();
+    if (_maxGL == 0 || _maxGame == 0)
+        throw ArcadeError("Arcade", "Invalid number of libraries.");
     for (auto it = begin(GLPaths); it != end(GLPaths); it++) {
         if ((*it).substr(0, 6) == "./lib/")
             dispLibs.emplace_back(new LibLoader<IDisplayModule *>(*it));
@@ -45,6 +48,8 @@ arcade::Arcade::~Arcade()
 
 void arcade::Arcade::run()
 {
+    clock_t chrono = clock();
+
     while (true) {
         event evt = _disp->getEvent();
         switch (evt) {
@@ -53,12 +58,41 @@ void arcade::Arcade::run()
             case arcade::event::Pause:
                 _pause = !_pause;
                 break;
+            case arcade::event::Restart:
+                delete _game;
+                _game = gamesLibs[_selectGame]->load();
+                break;
+            case arcade::event::SwitchGraphic:
+                if (_selectGL == 0 && 1 == _maxGL)
+                    break;
+                else {
+                    _selectGL++;
+                    if (_selectGL == _maxGL)
+                        _selectGL = 0;
+                    delete _disp;
+                    _disp = dispLibs[_selectGL]->load();
+                }
+                break;
+            case arcade::event::SwitchGame:
+                if (_selectGame == 0 && 1 == _maxGame)
+                    break;
+                else {
+                    _selectGame++;
+                    if (_selectGame == _maxGame)
+                        _selectGame = 0;
+                    delete _game;
+                    _game = gamesLibs[_selectGame]->load();
+                }
+                break;
             default:
                 break;
         }
-        if (_pause == false)
-            _game->updateGame(evt);
-        _disp->drawGameObjects(_game->getGameObjects());
+        if (clock() - chrono > 30000) {
+            chrono = clock();
+            if (_pause == false)
+                _game->updateGame(evt);
+            _disp->drawGameObjects(_game->getGameObjects());
+        }
     }
 }
 
@@ -76,15 +110,20 @@ void arcade::Arcade::runMenu()
             case arcade::event::Quit: return;
             case arcade::event::Up:
                 if (isLeft == true) {
-                    if (selector.x == 0)
-                        selector.x = GamesPaths.size()-1;
-                    else
+                    if (selector.x != 0)
                         selector.x--;
                 } else {
-                    if (selector.y == 0)
-                        selector.y = GLPaths.size() -1;
-                    else
+                    if (selector.y != 0)
                         selector.y--;
+                }
+                break;
+            case arcade::event::Down:
+                if (isLeft == true) {
+                    if (selector.x != _maxGame-1)
+                        selector.x++;
+                } else {
+                    if (selector.y != _maxGL-1)
+                        selector.y++;
                 }
                 break;
             case arcade::event::Right:

@@ -13,7 +13,7 @@ arcade::SDLModule::SDLModule() : _white({255, 255, 255, 255}), _black({0, 0, 0, 
 {
     if (SDL_Init(SDL_INIT_VIDEO) != 0 || TTF_Init() != 0)
         return;
-    _font = TTF_OpenFont("./lib/arial.ttf", 30);
+    _font = TTF_OpenFont("./medias/arial.ttf", 30);
     _win = SDL_CreateWindow("Arcade", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 900, 900, SDL_WINDOW_SHOWN);
     _ren = SDL_CreateRenderer(_win, -1, 0);
 
