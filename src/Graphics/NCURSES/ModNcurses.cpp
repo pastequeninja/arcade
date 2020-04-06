@@ -131,9 +131,10 @@ void arcade::NCURSESclass::move_cursor(std::vector<std::string> lib, std::vector
 
 void arcade::NCURSESclass::drawMenu(const std::vector<std::string> &games, const std::vector<std::string> &libgraph)
 {
+    int i = -2;
 
     clear();
-    if (LINES < 24 || COLS < 150) {
+     if (LINES < 24 || COLS < 150) {
             mvprintw((LINES / 2), (COLS / 2) - (21 / 2), "window size too small");
         }
     else {
@@ -142,18 +143,20 @@ void arcade::NCURSESclass::drawMenu(const std::vector<std::string> &games, const
         box(_Window, ACS_VLINE, ACS_HLINE);
         box(_PopUp, ACS_VLINE, ACS_HLINE);
         drawText("MENU", vector2<unsigned int>(LINES / 4, COLS / 2));
-        drawText(games[0], vector2<unsigned int>(LINES / 2 - 2, COLS / 1.4));
-        drawText(games[1], vector2<unsigned int>(LINES / 2, COLS / 1.4));
-        drawText(libgraph[0], vector2<unsigned int>(LINES / 2 - 2, COLS / 3));
-        drawText(libgraph[1], vector2<unsigned int>(LINES / 2, COLS / 3));
-        move_cursor(libgraph, games);
+        for (__SIZE_TYPE__ j = 0; j < games.size(); ++j, i += 2) {
+            drawText(games[j], vector2<unsigned int>(LINES / 2 - i, COLS / 1.4));
+        }
+        i = -2;
+        for (__SIZE_TYPE__ j = 0; j < libgraph.size(); ++j, i += 2)
+            drawText(libgraph[j], vector2<unsigned int>(LINES / 2 - i, COLS / 3));
+                move_cursor(libgraph, games);
         mvprintw(_Cursor_y, _Cursor_x, "-- ");
         drawTextPopUp(vector2<unsigned int>(1, 1), "You selected game : " + _GameSelected, _PopUp);
         drawTextPopUp(vector2<unsigned int>(2, 1), "You will load your game with : " + _LibSelected, _PopUp);
-        if (_GameSelected.size() != 0 && _LibSelected.size() != 0)
+         if (_GameSelected.size() != 0 && _LibSelected.size() != 0)
             drawTextPopUp(vector2<unsigned int>(3, 28), "PRESS SPACE TO START", _PopUp);
-        doupdate();
-    }
+         doupdate(); 
+     }
     usleep(DELAY);
 }
 

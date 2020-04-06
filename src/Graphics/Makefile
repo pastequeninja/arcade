@@ -6,18 +6,18 @@
 ##
 
 all:
-	make -C SDL
 	make -C NCURSES
 	make -C SFML
+	make -C SDL
 
 clean:
-	make clean -C SDL
 	make clean -C NCURSES
 	make clean -C SFML
+	make clean -C SDL
 
 fclean:	clean
-	make fclean -C SDL
 	make fclean -C NCURSES
 	make fclean -C SFML
+	make fclean -C SDL
 
 re:	fclean all

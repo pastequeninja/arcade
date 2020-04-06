@@ -17,14 +17,10 @@
 #ifndef MOD_SFML_HPP_
 #define MOD_SFML_HPP_
 
-//extern "C" arcade::IDisplayModule *create();
-
 namespace arcade {
     class SFMLclass : public arcade::IDisplayModule {
         private:
-            std::vector<sf::Text> _GamesNames;
             sf::RenderWindow _Window;
-            sf::Music _Music;
             sf::Sprite _BackgroundSprite;
             sf::Texture _BackgroundTexture;
             sf::Sprite _CursorSprite;
