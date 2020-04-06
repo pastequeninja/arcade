@@ -231,7 +231,6 @@ arcade::arcade_events arcade::NCURSESclass::getEvent(void)
         case 'p':
             return arcade::event::Pause;
         case 'q':
-        case 161:
             return arcade::arcade_events::Quit;
         case 'l':
             return arcade::event::SwitchGraphic;
