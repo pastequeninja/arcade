@@ -122,40 +122,36 @@ void arcade::SDLModule::move_cursor(const std::vector<std::string> &gl, const st
             switch (_evt.key.keysym.sym) {
                 case SDLK_DOWN:
                     if (cursor.side == SDLMenuCursor::LEFT) {
-                        if (cursor.pos.y == cursor.max.x)
-                            cursor.pos.y = 5;
-                        else
+                        if (cursor.pos.y != cursor.max.x)
                             cursor.pos.y += 2;
                     } else {
-                        if (cursor.pos.y == cursor.max.y)
-                            cursor.pos.y = 5;
-                        else
+                        if (cursor.pos.y != cursor.max.y)
                             cursor.pos.y += 2;
                     }
                     break;
                 case SDLK_UP:
                     if (cursor.side == SDLMenuCursor::LEFT) {
-                        if (cursor.pos.y == 5)
-                            cursor.pos.y = cursor.max.x;
-                        else
+                        if (cursor.pos.y != 5)
                             cursor.pos.y -= 2;
                     } else {
-                        if (cursor.pos.y == 5)
-                            cursor.pos.y = cursor.max.y;
-                        else
-                            cursor.pos.y += 2;
+                        if (cursor.pos.y != 5)
+                            cursor.pos.y -= 2;
                     }
                     break;
                 case SDLK_RIGHT:
                     if (cursor.side == SDLMenuCursor::LEFT) {
-                        cursor.pos.x = 18;
+                        cursor.pos.x = 16;
                         cursor.side = SDLMenuCursor::RIGHT;
+                        while (cursor.pos.y > cursor.max.y)
+                            cursor.pos.y -= 2;
                     }
                     break;
                 case SDLK_LEFT:
                     if (cursor.side == SDLMenuCursor::RIGHT) {
                         cursor.pos.x = 3;
                         cursor.side = SDLMenuCursor::LEFT;
+                        while (cursor.pos.y > cursor.max.x)
+                            cursor.pos.y -= 2;
                     }
                     break;
                 case SDLK_RETURN:
@@ -164,13 +160,6 @@ void arcade::SDLModule::move_cursor(const std::vector<std::string> &gl, const st
                     } else {
                         game = games[(cursor.pos.y - 5) / 2];
                     }
-//                    if (cursor.side == SDLMenuCursor::LEFT) {
-//                        game = games[(cursor.pos.y - 5) / 2];
-//                        break;
-//                    } else if (cursor.side == SDLMenuCursor::RIGHT) {
-//                        lib = gl[(cursor.pos.y - 5) / 2];
-//                        break;
-//                    }
                     break;
                 default: break;
             }
@@ -182,8 +171,6 @@ void arcade::SDLModule::move_cursor(const std::vector<std::string> &gl, const st
 void arcade::SDLModule::drawMenu(const std::vector<std::string> &games, const std::vector<std::string> &gl)
 {
     refresh();
-//    static struct SDLMenuCursor cursor;
-//    static vector2<unsigned> cursor(5, 5);
     cursor.max.x = 5 + 2 * (games.size()-1);
     cursor.max.y = 5 + 2 * (gl.size()-1);
     static std::string lib = "";
@@ -194,11 +181,12 @@ void arcade::SDLModule::drawMenu(const std::vector<std::string> &games, const st
     for (unsigned i = 0; i < games.size(); i++)
         drawText(games[i], vector2<unsigned>(5, 5 + i * 2));
     for (unsigned i = 0; i < gl.size(); i++)
-        drawText(gl[i], vector2<unsigned>(20, 5 + i * 2));
+        drawText(gl[i], vector2<unsigned>(18, 5 + i * 2));
     move_cursor(gl, games, lib, game);
     drawRect(cursor.pos, false, 255, 255, 255, 255);
 
     drawText("[ " + game + " + " + lib + " ]", vector2<unsigned>(5, 25));
+    drawText("Enter to select, Space to start when ready.", vector2<unsigned>(2, 28));
     //block selector
     display();
 }

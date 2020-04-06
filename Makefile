@@ -73,4 +73,7 @@ fclean:	clean
 
 re:             fclean all
 
-.PHONY:		all core graphicals games clean fclean re
+debug:		CXXFLAGS += -g
+debug:		re
+
+.PHONY:		all core graphicals games clean fclean re debug

@@ -30,7 +30,8 @@ template<typename T>
 inline
 arcade::LibLoader<T>::~LibLoader()
 {
-    dlclose(_handler);
+//    if (_handler == nullptr || dlclose(_handler) != 0)
+//        std::cerr << "Error dlclose " << _handler << std::endl;
 }
 
 template<typename T>
