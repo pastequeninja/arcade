@@ -107,7 +107,7 @@ void arcade::NCURSESclass::move_cursor(std::vector<std::string> lib, std::vector
         _Cursor_y = 19;
         _current_lib = 0;
     }
-    if ((_left_side) == false && ev == KEY_DOWN && ((_current_game) < games.size() - 1)) {
+    if ((_left_side) == false && ev == KEY_DOWN && ((_current_game) < (int)games.size() - 1)) {
         (_current_game)++;
         _Cursor_y += 2;
     }
@@ -115,7 +115,7 @@ void arcade::NCURSESclass::move_cursor(std::vector<std::string> lib, std::vector
         (_current_game)--;
         _Cursor_y -= 2;
     }
-    if ((_left_side) == true && ev == KEY_DOWN && ((_current_lib) < lib.size() - 1)) {
+    if ((_left_side) == true && ev == KEY_DOWN && ((_current_lib) < (int)lib.size() - 1)) {
         (_current_lib)++;
         _Cursor_y += 2;
     }
@@ -228,8 +228,17 @@ arcade::arcade_events arcade::NCURSESclass::getEvent(void)
             return arcade::arcade_events::Action2;
         case ' ':
             return arcade::arcade_events::Action1;
+        case 'p':
+            return arcade::event::Pause;
+        case 'q':
         case 161:
             return arcade::arcade_events::Quit;
+        case 'l':
+            return arcade::event::SwitchGraphic;
+        case 'g':
+            return arcade::event::SwitchGame;
+        case 'r':
+            return arcade::event::Restart;
         default: return arcade::arcade_events::Nothing;
     }
     return arcade::arcade_events::Nothing;;
