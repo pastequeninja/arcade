@@ -23,7 +23,7 @@ try : _selectGL(0), _selectGame(0), _pause(false), _disp(nullptr), _game(nullptr
     if (_maxGL == 0 || _maxGame == 0)
         throw ArcadeError("Arcade", "Invalid number of libraries.");
     for (auto it = begin(GLPaths); it != end(GLPaths); it++) {
-        if ((*it).substr(0, 6) == "./lib/")
+        if ((*it).substr(0, 6) == "./lib/" || (*it).substr(0, 4) == "lib/")
             dispLibs.emplace_back(new LibLoader<IDisplayModule *>(*it));
         else
             dispLibs.emplace_back(new LibLoader<IDisplayModule *>("./lib/" + *it));
