@@ -15,6 +15,7 @@ CXXFLAGS=\
 	-I.\
 	-I..\
 	-I$(ROOT_DIR)/includes\
+	-I$(ROOT_DIR)/includes/Errors\
 	-W\
 	-Wextra\
 	-fPIC\
@@ -27,7 +28,7 @@ LDFLAGS	=\
 	-lsfml-audio
 
 SRC	=\
-	ModSFML.cpp\
+	./ModSFML.cpp\
 	$(ROOT_DIR)/src/Errors/ArcadeError.cpp\
 
 OBJS=		$(SRC:%.cpp=%.o)

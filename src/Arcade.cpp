@@ -38,12 +38,10 @@ try : _selectGL(0), _selectGame(0), _pause(false), _disp(nullptr), _game(nullptr
 
 arcade::Arcade::~Arcade()
 {
-     delete _disp;
-     delete _game;
-     for (unsigned i = 0; i < dispLibs.size(); i++)
-         delete (dispLibs[i]);
-     for (unsigned i = 0; i < gamesLibs.size(); i++)
-         delete (gamesLibs[i]);
+    if (_disp)
+        delete _disp;
+     if (_game)
+         delete _game;
 }
 
 void arcade::Arcade::run()

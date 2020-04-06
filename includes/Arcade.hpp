@@ -26,8 +26,8 @@ namespace arcade
         void runMenu();
 
     private:
-        std::vector<LibLoader<IDisplayModule *> *> dispLibs;
-        std::vector<LibLoader<IGameModule *> *> gamesLibs;
+        std::vector<std::unique_ptr<LibLoader<IDisplayModule *>>> dispLibs;
+        std::vector<std::unique_ptr<LibLoader<IGameModule *>>> gamesLibs;
         unsigned _selectGL, _selectGame, _maxGL, _maxGame;
         bool _pause;
         IDisplayModule *_disp;

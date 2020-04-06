@@ -34,6 +34,7 @@ CXXFLAGS=\
 	-Iincludes\
 	-Iincludes/Errors\
 	-std=c++17\
+	-fPIC\
 
 LDFLAGS	=\
 	-ldl\
@@ -44,6 +45,7 @@ GXX	=	g++
 all:
 		make core -C .
 		make graphicals -C .
+		make games -C .
 
 $(NAME):	$(OBJS)
 
