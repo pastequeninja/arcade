@@ -175,6 +175,7 @@ void arcade::SDLModule::drawMenu(const std::vector<std::string> &games, const st
     cursor.max.y = 5 + 2 * (gl.size()-1);
     static std::string lib = "";
     static std::string game = "";
+//    std::cout << "cursor y: " << cursor.pos.y << std::endl;
     //create box
 //    std::cout << "LIB " << lib << " | GAME " << game << std::endl;
     drawText("MENU ARCADE", vector2<>(14, 1));
@@ -210,14 +211,6 @@ arcade::event arcade::SDLModule::getEvent()
                 if (_evt.window.event == SDL_WINDOWEVENT_CLOSE)
                     return Quit;
                 return Nothing;
-            case SDL_KEYDOWN:
-                switch (_evt.key.keysym.sym) {
-                    case SDLK_UP: return Up;
-                    case SDLK_DOWN: return Down;
-                    case SDLK_RIGHT: return Right;
-                    case SDLK_LEFT: return Left;
-                    default: return Nothing;
-                }
             case SDL_KEYUP:
                 switch (_evt.key.keysym.sym) {
                     case SDLK_UP: return Up;
@@ -237,6 +230,7 @@ arcade::event arcade::SDLModule::getEvent()
             default: return Nothing;
         }
     } else
+        _evt.type = SDL_KEYDOWN;
         return Nothing;
 }
 
