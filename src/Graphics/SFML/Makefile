@@ -18,6 +18,7 @@ CXXFLAGS=\
 	-I$(ROOT_DIR)/includes/Errors\
 	-W\
 	-Wextra\
+	-Werror\
 	-fPIC\
 	-std=c++17\
 

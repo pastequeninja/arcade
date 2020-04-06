@@ -14,8 +14,10 @@ CXXFLAGS=\
 	-I..\
 	-W\
 	-Wextra\
+	-Werror\
 	-fPIC\
 	-std=c++17
+
 LDFLAGS=\
 	-lncurses
 
