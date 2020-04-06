@@ -148,7 +148,7 @@ void arcade::NCURSESclass::drawMenu(const std::vector<std::string> &games, const
         i = -2;
         for (__SIZE_TYPE__ j = 0; j < libgraph.size(); ++j, i += 2)
             drawText(libgraph[j], vector2<unsigned int>(LINES / 2 - i, COLS / 3));
-                move_cursor(libgraph, games);
+        move_cursor(libgraph, games);
         mvprintw(_Cursor_y, _Cursor_x, "-- ");
         drawTextPopUp(vector2<unsigned int>(1, 1), "You selected game : " + _GameSelected, _PopUp);
         drawTextPopUp(vector2<unsigned int>(2, 1), "You will load your game with : " + _LibSelected, _PopUp);
@@ -237,6 +237,8 @@ arcade::arcade_events arcade::NCURSESclass::getEvent(void)
             return arcade::event::SwitchGraphic;
         case 'g':
             return arcade::event::SwitchGame;
+        case 'm':
+            return arcade::event::Menu;
         case 'r':
             return arcade::event::Restart;
         default: return arcade::arcade_events::Nothing;
