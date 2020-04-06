@@ -25,6 +25,11 @@ namespace arcade
         void load();
         void runMenu();
 
+        enum run_type
+        {
+            RUN, LEAVE, MENU
+        };
+
     private:
         std::vector<std::unique_ptr<LibLoader<IDisplayModule *>>> dispLibs;
         std::vector<std::unique_ptr<LibLoader<IGameModule *>>> gamesLibs;
@@ -33,6 +38,7 @@ namespace arcade
         IDisplayModule *_disp;
         IGameModule *_game;
         const std::string _originPath;
+        enum run_type _rt;
     };
 }
 

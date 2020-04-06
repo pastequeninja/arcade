@@ -236,6 +236,8 @@ arcade::arcade_events arcade::NCURSESclass::getEvent(void)
             return arcade::event::SwitchGraphic;
         case 'g':
             return arcade::event::SwitchGame;
+        case 'm':
+            return arcade::event::Menu;
         case 'r':
             return arcade::event::Restart;
         default: return arcade::arcade_events::Nothing;

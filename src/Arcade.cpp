@@ -14,7 +14,7 @@
 #include <ctime>
 
 arcade::Arcade::Arcade(const std::string &glPath)
-try : _selectGL(0), _selectGame(0), _pause(false), _disp(nullptr), _game(nullptr), _originPath(glPath)
+try : _selectGL(0), _selectGame(0), _pause(false), _disp(nullptr), _game(nullptr), _originPath(glPath), _rt(MENU)
 {
     std::vector<std::string> GLPaths = LibParser::collectLibs(glPath);
     std::vector<std::string> GamesPaths = LibParser::collectLibs();
@@ -46,9 +46,10 @@ arcade::Arcade::~Arcade()
 
 void arcade::Arcade::run()
 {
+
     clock_t chrono = clock();
 
-    while (true) {
+    while (_rt == RUN) {
         event evt = _disp->getEvent();
         switch (evt) {
             case arcade::event::Quit:
@@ -82,6 +83,8 @@ void arcade::Arcade::run()
                     _game = gamesLibs[_selectGame]->load();
                 }
                 break;
+            case arcade::event::Menu:
+                _rt = MENU;
             default:
                 break;
         }
@@ -92,6 +95,8 @@ void arcade::Arcade::run()
             _disp->drawGameObjects(_game->getGameObjects());
         }
     }
+    if (_rt == MENU)
+        runMenu();
 }
 
 void arcade::Arcade::runMenu()
@@ -101,10 +106,10 @@ void arcade::Arcade::runMenu()
     bool isLeft = true;
     vector2<unsigned> selector = {0, 0};
     vector2<bool> areSelec = {false, false};
-    bool runMenu = true;
+//    bool runMenu = true;
 //    clock_t chrono = clock();
 
-    while (runMenu) {
+    while (_rt == MENU) {
 //        if (clock() - chrono >= 30000)
 //            continue;
 //        chrono = clock();
@@ -147,7 +152,7 @@ void arcade::Arcade::runMenu()
                 if (areSelec.x == false || areSelec.y == false)
                     break;
                 else
-                    runMenu = false;
+                    _rt = RUN;
             default : break;
         }
         _disp->drawMenu(GamesPaths, GLPaths);

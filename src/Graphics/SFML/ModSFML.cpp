@@ -28,14 +28,14 @@ arcade::SFMLclass::SFMLclass()
         std::cerr << "ERROR" << std::endl;
     _CursorSprite.setTexture(_CursorTexture);
     _CharacterBigSize = 40;
-    _Player.setSize(sf::Vector2f(20, 20));
+    _Player.setSize(sf::Vector2f(RATIO_GRID, RATIO_GRID));
     _Player.setFillColor(sf::Color::White);
     _Bonus.setSize(sf::Vector2f(10, 10));
     _Bonus.setFillColor(sf::Color::White);
 
     _Wall.setFillColor(sf::Color::Black);
-    _Wall.setOutlineThickness(10);
-    _Wall.setOutlineColor(sf::Color(250, 150, 100));
+    _Wall.setSize(sf::Vector2f(RATIO_GRID, RATIO_GRID));
+    _Wall.setFillColor(sf::Color(250, 150, 100));
 
     _Window.create(sf::VideoMode(800, 800), "ARCADE");
   
@@ -54,40 +54,40 @@ arcade::SFMLclass::~SFMLclass()
 
 void arcade::SFMLclass::drawPlayer(const arcade::vector2<unsigned> &pos)
 {
-    _Player.setPosition(pos.x, pos.y);
+    _Player.setPosition(pos.x * RATIO_GRID, pos.y * RATIO_GRID);
     _Window.draw(_Player);
 }
 
 void arcade::SFMLclass::drawPlayer2(const arcade::vector2<unsigned> &pos)
 {
     (void)pos;
-    _Player.setPosition(pos.x, pos.y);
+    _Player.setPosition(pos.x * RATIO_GRID, pos.y * RATIO_GRID);
     _Window.draw(_Player);
 }
 
 void arcade::SFMLclass::drawPlayerHit(const arcade::vector2<unsigned> &pos)
 {
     (void)pos;
-    _Player.setPosition(pos.x, pos.y);
+    _Player.setPosition(pos.x * RATIO_GRID, pos.y * RATIO_GRID);
     _Window.draw(_Player);
 }
 
 void arcade::SFMLclass::drawWall(const arcade::vector2<unsigned> &pos)
 {
-    _Wall.setPosition(pos.x, pos.y);
+    _Wall.setPosition(pos.x * RATIO_GRID, pos.y * RATIO_GRID);
     _Window.draw(_Wall);
 }
 
 void arcade::SFMLclass::drawBonus(const arcade::vector2<unsigned> &pos)
 {
-    _Bonus.setPosition(pos.x * 30, pos.y * 30);
+    _Bonus.setPosition(pos.x * RATIO_GRID, pos.y * RATIO_GRID);
     _Window.draw(_Bonus);
 }
 
 void arcade::SFMLclass::drawBonus2(const arcade::vector2<unsigned> &pos)
 {
     (void)pos;
-    _Bonus.setPosition(pos.x * 30, pos.y * 30);
+    _Bonus.setPosition(pos.x * RATIO_GRID, pos.y * RATIO_GRID);
     _Window.draw(_Bonus);
 }
 

@@ -5,6 +5,9 @@
 ** SFMLclass.hpp
 */
 
+#ifndef MOD_SFML_HPP_
+#define MOD_SFML_HPP_
+
 #include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
 #include "../IDisplayModule.hpp"
@@ -14,10 +17,9 @@
 #include <vector>
 #include "../Errors/ArcadeError.hpp"
 
-#ifndef MOD_SFML_HPP_
-#define MOD_SFML_HPP_
-
 //extern "C" arcade::IDisplayModule *create();
+
+#define RATIO_GRID  20
 
 namespace arcade {
     class SFMLclass : public arcade::IDisplayModule {
