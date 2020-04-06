@@ -268,6 +268,3 @@ void arcade::SFMLclass::drawMenu(const std::vector<std::string> &games, const st
     _Window.display();
     _Window.clear();
 }
-
-void arcade::SFMLclass::drawEnd()
-{}

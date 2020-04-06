@@ -52,7 +52,6 @@ namespace arcade {
             void drawEnemy2(const arcade::vector2<unsigned> &) final;
             void drawGameObjects(const std::vector<GameObject> &go) final;
             void drawMenu(const std::vector<std::string> &gamename, const std::vector<std::string> &display) final;
-            void drawEnd() final;
             arcade_events getEvent(void) final;
             const std::string &getName() const final;
             void refresh(void) final;

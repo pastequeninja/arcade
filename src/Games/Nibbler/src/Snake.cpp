@@ -62,9 +62,6 @@ arcade::snake::~snake()
 arcade::IGameModule::~IGameModule()
 {}
 
-void arcade::snake::init()
-{}
-
 arcade::GameObject arcade::snake::findPlayerGameObject(std::vector<GameObject> go)
 {
     std::vector<GameObject>::iterator g;
@@ -186,6 +183,3 @@ const std::vector<arcade::GameObject> &arcade::snake::getGameObjects(void) const
 {
     return _SnakeGO;
 }
-
-void arcade::snake::destroy()
-{}

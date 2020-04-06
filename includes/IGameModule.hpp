@@ -21,8 +21,6 @@ namespace arcade
         virtual ~IGameModule() = 0;
         virtual void updateGame(const event &evt) = 0;
         virtual const std::vector<GameObject> &getGameObjects(void) const = 0;
-        virtual void init(void) = 0; // ctor
-        virtual void destroy(void) = 0; // dtor
     };
 }
 

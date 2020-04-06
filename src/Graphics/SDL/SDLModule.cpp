@@ -192,10 +192,6 @@ void arcade::SDLModule::drawMenu(const std::vector<std::string> &games, const st
     display();
 }
 
-void arcade::SDLModule::drawEnd()
-{
-}
-
 const std::string &arcade::SDLModule::getName() const
 {
     return _name;

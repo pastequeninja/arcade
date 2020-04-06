@@ -54,9 +54,6 @@ void arcade::NCURSESclass::drawPlayer(const arcade::vector2<unsigned> &pos)
     mvwprintw(_GameWindow, pos.y, pos.x, "O");
 }
 
-void arcade::NCURSESclass::drawEnd()
-{}
-
 void arcade::NCURSESclass::drawPlayer2(const arcade::vector2<unsigned> &pos)
 {
     mvwprintw(_GameWindow, pos.y, pos.x, "O");

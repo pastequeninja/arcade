@@ -48,7 +48,6 @@ namespace arcade
         void drawGameObjects(const std::vector<GameObject> &go) final;
         void move_cursor(const std::vector<std::string> &gl, const std::vector<std::string> &games, std::string &lib, std::string &game);
         void drawMenu(const std::vector<std::string> &gamename, const std::vector<std::string> &displayname) final;
-        void drawEnd(void) final;
         const std::string &getName() const final;
         arcade::event getEvent(void) final;
         void refresh(void) final;

@@ -34,10 +34,11 @@ namespace arcade
         virtual void drawText(const std::string &data, const vector2<unsigned> &pos) = 0;
         virtual void drawGameObjects(const std::vector<GameObject> &go) = 0;
         virtual void drawMenu(const std::vector<std::string> &gamename, const std::vector<std::string> &displayname) = 0;
-        virtual void drawEnd() = 0;
         virtual const std::string &getName() const = 0;
         virtual arcade::arcade_events getEvent(void) = 0;
         virtual void refresh(void) = 0;
+
+    private:
         virtual void display() = 0;
     };
 }
