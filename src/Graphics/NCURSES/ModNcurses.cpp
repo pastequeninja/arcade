@@ -42,7 +42,6 @@ arcade::NCURSESclass::NCURSESclass()
     nodelay(stdscr, TRUE);
     noecho();
 
-    //GAME//
     _GameWindow = subwin(stdscr, LINES / 2, COLS/4, 0, 0);
 }
 
@@ -146,7 +145,7 @@ void arcade::NCURSESclass::drawMenu(const std::vector<std::string> &games, const
         i = -2;
         for (__SIZE_TYPE__ j = 0; j < libgraph.size(); ++j, i += 2)
             drawText(libgraph[j], vector2<unsigned int>(LINES / 2 - i, COLS / 3));
-                move_cursor(libgraph, games);
+        move_cursor(libgraph, games);
         mvprintw(_Cursor_y, _Cursor_x, "-- ");
         drawTextPopUp(vector2<unsigned int>(1, 1), "You selected game : " + _GameSelected, _PopUp);
         drawTextPopUp(vector2<unsigned int>(2, 1), "You will load your game with : " + _LibSelected, _PopUp);
@@ -172,7 +171,6 @@ void arcade::NCURSESclass::drawTextPopUp(const vector2<unsigned> pos, const std:
 
 void arcade::NCURSESclass::display()
 {}
-
 
 void arcade::NCURSESclass::drawText(const std::string &data, const vector2<unsigned> &pos)
 {

@@ -54,6 +54,7 @@ void arcade::Arcade::run()
             continue;
         chrono = clock();
         event evt = _disp->getEvent();
+        if (evt == arcade::event::Right)
         switch (evt) {
             case arcade::event::Quit:
                 return;
