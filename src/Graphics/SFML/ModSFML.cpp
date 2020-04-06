@@ -22,10 +22,14 @@ extern "C" {
 arcade::SFMLclass::SFMLclass()
 {
     char *font = strdup("medias/Bubbleboddy-ExtraLightTrial.ttf");
-    if (!_Font.loadFromFile(font))
-        std::cerr << "ERROR" << std::endl;
-    if (!_CursorTexture.loadFromFile("medias/arrow.png"))
-        std::cerr << "ERROR" << std::endl;
+    try {
+        if (!_Font.loadFromFile(font))
+            throw ArcadeError("sfmlClass", "Font not found");
+        if (!_CursorTexture.loadFromFile("medias/arrow.png"))
+            throw ArcadeError("sfmlClass", "Cursor sprite not found");
+    } catch (arcade::ArcadeError &e) {
+        throw e;
+    } 
     _CursorSprite.setTexture(_CursorTexture);
     _CharacterBigSize = 40;
     _Player.setSize(sf::Vector2f(20, 20));
@@ -129,16 +133,17 @@ arcade::event arcade::SFMLclass::getEvent()
 
 void arcade::SFMLclass::refresh()
 {
-    this->_Window.display();
     _Window.clear();
 }
 
 void arcade::SFMLclass::display()
 {
+    _Window.display();
 }
 
 void arcade::SFMLclass::drawGameObjects(const std::vector<arcade::GameObject> &g)
 {
+    refresh();
     for (auto it = g.begin(); it != g.end(); it++) {
         switch (it->type) {
             case arcade::GameObject::PLAYER: drawPlayer(it->pos);
@@ -160,7 +165,7 @@ void arcade::SFMLclass::drawGameObjects(const std::vector<arcade::GameObject> &g
             default: break;
         }
     }
-    refresh();
+    display();
 }
 
 const std::string &arcade::SFMLclass::getName() const

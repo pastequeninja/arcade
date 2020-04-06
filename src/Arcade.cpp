@@ -50,6 +50,7 @@ void arcade::Arcade::run()
 
     while (true) {
         event evt = _disp->getEvent();
+        if (evt == arcade::event::Right)
         switch (evt) {
             case arcade::event::Quit:
                 return;
@@ -87,8 +88,9 @@ void arcade::Arcade::run()
         }
         if (clock() - chrono > 30000) {
             chrono = clock();
-            if (_pause == false)
+            if (_pause == false) {
                 _game->updateGame(evt);
+            }
             _disp->drawGameObjects(_game->getGameObjects());
         }
     }
