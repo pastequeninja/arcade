@@ -30,6 +30,7 @@ all:		$(LIBNAME)
 
 $(LIBNAME):	$(OBJS)
 			$(GXX) $(OBJS) -fPIC -shared -o $(LIBNAME) $(LDFLAGS)
+			mkdir -p ../../../lib
 			mv $(LIBNAME) ../../../lib/
 
 clean:
